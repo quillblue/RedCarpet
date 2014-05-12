@@ -1,0 +1,19 @@
+html {
+	font-family: "微软雅黑",Arial,"san-serif";
+	font-size:14px;
+	color: #7c7878;	
+}
+
+body{
+	background-color: #f3f3f3;
+}
+
+a{
+	text-decoration: none;
+}
+
+.container{
+	width: 960
+}
+
+
