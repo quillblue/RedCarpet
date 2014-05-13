@@ -16,5 +16,10 @@ namespace hongtan.Controllers
             return View();
         }
 
+        public ActionResult SwitchDisplay(int id)
+        {
+            return View();
+        }
+
     }
 }

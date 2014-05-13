@@ -30,9 +30,9 @@ namespace hongtan.Models
 		
     #region 可扩展性方法定义
     partial void OnCreated();
-    partial void Inserthongtan_Vote(hongtan_Vote instance);
-    partial void Updatehongtan_Vote(hongtan_Vote instance);
-    partial void Deletehongtan_Vote(hongtan_Vote instance);
+    partial void InsertBidModel(BidModel instance);
+    partial void UpdateBidModel(BidModel instance);
+    partial void DeleteBidModel(BidModel instance);
     #endregion
 		
 		public bidDataContext() : 
@@ -65,17 +65,17 @@ namespace hongtan.Models
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<hongtan_Vote> hongtan_Vote
+		public System.Data.Linq.Table<BidModel> hongtan_Vote
 		{
 			get
 			{
-				return this.GetTable<hongtan_Vote>();
+				return this.GetTable<BidModel>();
 			}
 		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.hongtan_Vote")]
-	public partial class hongtan_Vote : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class BidModel : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -106,7 +106,7 @@ namespace hongtan.Models
     partial void OnVoteContentChanged();
     #endregion
 		
-		public hongtan_Vote()
+		public BidModel()
 		{
 			OnCreated();
 		}

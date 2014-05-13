@@ -2,10 +2,10 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="bid">
   <DataContextMoniker Name="/bidDataContext" />
   <nestedChildShapes>
-    <classShape Id="e2170f9a-896e-43d3-8712-51b7a95a4c60" absoluteBounds="5.625, 2.5, 2, 1.7220992024739581">
-      <DataClassMoniker Name="/bidDataContext/hongtan_Vote" />
+    <classShape Id="9f78369e-0bbf-4e4b-a4d0-046fbff56ffe" absoluteBounds="0.5, 0.5, 2, 1.7220992024739581">
+      <DataClassMoniker Name="/bidDataContext/BidModel" />
       <nestedChildShapes>
-        <elementListCompartment Id="d8927f10-5370-498d-9a13-96687d3ece6f" absoluteBounds="5.6400000000000006, 2.96, 1.9700000000000002, 1.1620992024739583" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="259d41f7-b8c6-40e4-9e4a-8ddf7e970439" absoluteBounds="0.515, 0.96, 1.9700000000000002, 1.1620992024739583" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>
