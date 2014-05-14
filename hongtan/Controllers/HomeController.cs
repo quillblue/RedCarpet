@@ -33,15 +33,15 @@ namespace hongtan.Controllers
                 bm.VoterIP = IP;
                 bm.VoteDate = DateTime.Now.Date;
                 bm.VoteTime = DateTime.Now;
-                bm.VoteContent = "";
+                bm.VoteContent = Request.Form["VoteCheckbox"];
                 br.Insert(bm);
                 br.Save();
+                return Content("<script>alert('投票成功！');</script>", "text/html");
             }
             catch (Exception e)
-            { 
-                
+            {
+                return Content("<script>alert('投票失败，请稍后重试。错误信息：" + e.ToString() + "');</script>", "text/html");
             }
-            return View();
         }
 
         /// <summary>
