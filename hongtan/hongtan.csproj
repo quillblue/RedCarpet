@@ -134,7 +134,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Global.asax" />
-    <Content Include="Web.config" />
+    <Content Include="Views\Home\Vote.aspx" />
+    <Content Include="Views\Home\VoteItem.ascx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -168,6 +172,8 @@
       <LastGenOutput>CandidateModel.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Views\Shared\FrontMaster.Master" />
+    <Content Include="Views\Shared\AdminMaster.Master" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Models\CandidateModel.dbml.layout">

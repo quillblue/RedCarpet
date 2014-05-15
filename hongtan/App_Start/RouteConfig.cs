@@ -22,7 +22,7 @@ namespace hongtan
             routes.MapRoute(
                 name: "Home",
                 url: "{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Vote", id = UrlParameter.Optional }
             );
         }
     }

@@ -12,12 +12,12 @@ namespace hongtan.Controllers
         //
         // GET: /Vote/
 
-        public ActionResult Index()
+        public ActionResult Vote()
         {
             return View();
         }
 
-        public ActionResult Vote()
+        public ActionResult VoteSubmit()
         {
             string IP = "";
             DateTime date = DateTime.Now.Date;
