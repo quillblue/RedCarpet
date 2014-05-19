@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta charset="utf-8"/>
-	<title>复旦大学2014年毕业晚会红毯入场仪式专题站</title>
+	<title>复旦大学2014年毕业晚会红毯入场仪式投票</title>
 	<link rel="stylesheet" type="text/css" href="css/reset.css">
 	<link rel="stylesheet" type="text/css" href="css/hongtan.css">
 	<script language="javascript" src="js/jquery-1.7.2.min.js"></script>
@@ -20,13 +20,6 @@
 		<div class="content">
 			<div class="left_page">
                  <asp:ContentPlaceHolder ID="LeftPagePlaceHolder" runat="server"></asp:ContentPlaceHolder>
-				
-				<div class="story_list">
-					<div class="story">
-						<p class="title">王阿丁：我想邀请Richor一起走红毯</p>
-						<p>好伙伴不解释！</p>
-					</div>
-				</div>
 			</div>
 			<div class="right_page">
                 <asp:ContentPlaceHolder ID="RightPagePlaceHolder" runat="server"></asp:ContentPlaceHolder>

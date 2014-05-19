@@ -1,0 +1,53 @@
+html {
+	font-family: "微软雅黑",Arial,"san-serif";
+	font-size:14px;
+	color: #7c7878;	
+}
+
+body{
+	line-height: 150%;
+}
+.nav a{
+	text-decoration: none;
+	color: #fff;
+}
+
+.nav{
+	float: left;
+	min-width: 180px;
+	height: 100%;
+	background-color: #3366ff;
+	color: #fff;
+	padding:20px;
+}
+.content{
+	float: left;
+	margin-left: 30px;
+	width: 780px;
+}
+.content_title{
+	padding: 30px 10px;
+	font-size: 28px;
+}
+
+table{
+	min-width: 600px;
+	line-height: 180%;
+}
+thead{
+	text-align: center;
+}
+td{
+	border:1px solid #999;
+	vertical-align: middle;
+}
+tr{
+	line-height: 250%;
+}
+.table_short{
+	text-align: center;
+	
+}
+.table_long{
+	line-height: 150%;
+}

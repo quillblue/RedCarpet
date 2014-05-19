@@ -3,15 +3,41 @@
 <!DOCTYPE html>
 
 <html>
-<head runat="server">
-    <meta name="viewport" content="width=device-width" />
-    <title><asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>
+<head>
+	<meta charset="utf-8"/>
+	<title>管理后台 复旦大学2014年毕业晚会红毯入场仪式投票</title>
+	<link rel="stylesheet" type="text/css" href="/hongtan/css/reset.css">
+	<!--<link rel="stylesheet" type="text/css" href="../css/bootstrap.css">-->
+	<link rel="stylesheet" type="text/css" href="/hongtan/css/admin.css">
 </head>
 <body>
-    <div>
-        <asp:ContentPlaceHolder ID="MainContent" runat="server">
-        
-        </asp:ContentPlaceHolder>
-    </div>
+	<div class="nav">
+		<ul>
+			<li>管理后台</li>
+			<li>==============</li>
+			<li><a href="ManageNew">>>审核新提名</a></li>
+			<li><a href="CurrentVote">>>查看目前投票情况</a></li>
+		</ul>
+	</div>
+	<div class="content">
+		<div class="content_title"><asp:ContentPlaceHolder ID="titleHolder" runat="server"></asp:ContentPlaceHolder></div>
+		<table class="table-hover" border="1">
+			<thead>
+			<tr>
+				<td width="50px">Id</td>
+				<td width="150px">姓名</td>
+				<td width="300px">简介</td>
+				<td width="50px">票数</td>
+				<td width="50px">推荐度</td>
+				<td width="120px">操作</td>
+			</tr>
+			</thead>
+            <tbody>
+			<asp:ContentPlaceHolder ID="ContentHolder" runat="server"></asp:ContentPlaceHolder>
+			</tbody>
+		</table>
+	</div>
+	<div style="clear:both"></div>
 </body>
 </html>
+

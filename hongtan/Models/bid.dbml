@@ -3,10 +3,10 @@
   <Table Name="dbo.hongtan_Vote" Member="hongtan_Vote">
     <Type Name="BidModel">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="VoterIP" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="VoteDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="VoterIP" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="VoteDate" Type="System.DateTime" DbType="Datetime NOT NULL" CanBeNull="false" />
       <Column Name="VoteTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="VoteContent" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="VoteContent" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

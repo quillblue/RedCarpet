@@ -14,18 +14,32 @@ namespace hongtan.Controllers
 
         public ActionResult Vote()
         {
-            return View();
+            CandidateRepository cr = new CandidateRepository();
+            List<CandidateModel> canList = cr.GetAllShown();
+            return View(canList);
         }
 
         public ActionResult VoteSubmit()
         {
-            string IP = "";
+            string IP = Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+            if (string.IsNullOrEmpty(IP)) {
+                IP = Request.ServerVariables["REMOTE_ADDR"];
+            }
+            if (string.IsNullOrEmpty(IP))
+            {
+                IP = Request.UserHostAddress;
+            }
+            String[] VoteCon = Request.Form["VoteCheck"].Split(',');
+            if (VoteCon.Count() > 5) 
+            {
+                return Content("<script>alert('您选择了超过5位候选人，本次投票无效！');location.replace('http://stu.fudan.edu.cn/hongtan/');</script>", "text/html");
+            }
             DateTime date = DateTime.Now.Date;
             bidRepository br = new bidRepository();
             CandidateRepository cr = new CandidateRepository();
             if(!br.CheckDuplicate(IP,date))
             {
-                return Content("<script>alert('您今天已经投过票了！');</script>", "text/html");
+                return Content("<script>alert('您今天已经投过票了！');location.replace('http://stu.fudan.edu.cn/hongtan/');</script>", "text/html");
             }
             try
             {
@@ -33,21 +47,20 @@ namespace hongtan.Controllers
                 bm.VoterIP = IP;
                 bm.VoteDate = DateTime.Now.Date;
                 bm.VoteTime = DateTime.Now;
-                bm.VoteContent = Request.Form["VoteCheckbox"];
+                bm.VoteContent = Request.Form["VoteCheck"];
+                foreach (String s in VoteCon) {
+                    cr.BeVoted(Convert.ToInt32(s));
+                }
                 br.Insert(bm);
                 br.Save();
-                return Content("<script>alert('投票成功！');</script>", "text/html");
+                return Content("<script>alert('投票成功！');location.replace('http://stu.fudan.edu.cn/hongtan/');</script>", "text/html");
             }
             catch (Exception e)
             {
-                return Content("<script>alert('投票失败，请稍后重试。错误信息：" + e.ToString() + "');</script>", "text/html");
+                return Content("<script>alert('投票失败，请稍后重试。错误信息：" + e.Message.ToString() + "');location.replace('http://stu.fudan.edu.cn/hongtan/');</script>", "text/html");
             }
         }
 
-        /// <summary>
-        /// 提名-单元测试Pass
-        /// </summary>
-        /// <returns></returns>
         public ActionResult AddName()
         {
             try
@@ -56,15 +69,15 @@ namespace hongtan.Controllers
                 cm.BidCount = 0;
                 cm.Hidden = 1;
                 cm.Priority = 0;
-                cm.Name = Request.Form["Name"];
-                cm.Introduction = Request.Form["Introduction"];
+                cm.Name = Request.Form["add_name"];
+                cm.Introduction = Request.Form["add_intro"];
                 CandidateRepository cr = new CandidateRepository();
                 cr.Insert(cm);
                 cr.Save();
-                return Content("<script>alert('提名成功，经过审核后您的提名将会出现在左侧投票列表中，感谢您的参与！');</script>", "text/html");
+                return Content("<script>alert('提名成功，经过审核后您的提名将会出现在左侧投票列表中，感谢您的参与！');location.replace('http://stu.fudan.edu.cn/hongtan/');</script>", "text/html");
             }
             catch (Exception e) {
-                return Content("<script>alert('提交失败，请稍后重试。错误信息："+e.ToString()+"');</script>", "text/html");
+                return Content("<script>alert('提交失败，请稍后重试。错误信息：" + e.Message.ToString() + "');location.replace('http://stu.fudan.edu.cn/hongtan/');</script>", "text/html");
             }
             
         }

@@ -16,7 +16,7 @@ namespace hongtan
             routes.MapRoute(
                 name: "Admin",
                 url: "admin/{action}/{id}",
-                defaults: new { controller = "Admin", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Admin", action = "ManageNew", id = UrlParameter.Optional }
             );
             
             routes.MapRoute(

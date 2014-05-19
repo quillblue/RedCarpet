@@ -39,7 +39,7 @@ namespace hongtan.Models
             List<CandidateModel> cl = new List<CandidateModel>();
             IEnumerable<CandidateModel> queryCandidateList = from CandidateModel in db.CandidateModel
                                                              where CandidateModel.Hidden == 0
-                                                             orderby CandidateModel.BidCount
+                                                             orderby CandidateModel.Priority descending
                                                              select CandidateModel;
             foreach (CandidateModel c in queryCandidateList)
             {
@@ -66,6 +66,21 @@ namespace hongtan.Models
         {
             CandidateModel candidate = db.CandidateModel.First(c => c.Id == id);
             db.CandidateModel.DeleteOnSubmit(candidate);
+        }
+
+        public CandidateModel GetInfoById(int id) 
+        {
+            CandidateModel candidate = db.CandidateModel.First(c => c.Id == id);
+            return candidate;
+        }
+
+        public void Update(CandidateModel cm)
+        {
+            CandidateModel candidate = db.CandidateModel.First(c => c.Id == cm.Id);
+            candidate.Name = cm.Name;
+            candidate.Introduction = cm.Introduction;
+            candidate.Priority = cm.Priority;
+            db.SubmitChanges();
         }
 
         public void Save() 
