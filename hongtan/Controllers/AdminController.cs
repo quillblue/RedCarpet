@@ -50,7 +50,7 @@ namespace hongtan.Controllers
             return View(NewCanList);
         }
 
-        [Authorize]
+        //[Authorize]
         public ActionResult ManageEditApply() {
             CandidateRepository cr = new CandidateRepository();
             List<EditApplyModel> EditApplyList = cr.GetAllEditApply(); ;
@@ -61,7 +61,7 @@ namespace hongtan.Controllers
             return View(displayList);
         }
 
-        [Authorize]
+        //[Authorize]
         public ActionResult Edit(int id)
         {
             CandidateRepository cr = new CandidateRepository();

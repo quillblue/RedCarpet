@@ -1,12 +1,13 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Vote" Class="bidDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=10.73.4.41;Initial Catalog=Vote;User ID=Vote" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="VoteConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Hongtan_Vote" Member="hongtan_Vote">
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Hongtan" Class="bidDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\Hongtan.mdf;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="HongtanConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Hongtan_Vote" Member="BidModel">
     <Type Name="BidModel">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="VoterIP" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="VoteDate" Type="System.DateTime" DbType="Datetime NOT NULL" CanBeNull="false" />
+      <Column Name="VoteDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="VoteTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="VoteContent" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="VoteStatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

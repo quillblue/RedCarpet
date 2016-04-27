@@ -15,26 +15,29 @@
                 <p>提名前请在投票页搜索确认被提名人未曾被提名。</p>
             </div>
             <div class="intro">
-                <%Html.BeginForm("AddNameSubmit", "Home");%>
                 <table>
                     <tr class="formSingleLine">
                         <td class="form_item">被提名人姓名<span class="requiredItem">*</span></td>
                         <td>
-                            <input name="name" type="text" class="textBoxSingleLine" maxlength="20" required="required" /></td>
+                            <input name="name" type="text" class="textBoxSingleLine" maxlength="20" required="required" data-bind="value:name" /></td>
                         <td></td>
                     </tr>
                     <tr class="formSingleLine">
                         <td class="form_item">被提名人类型<span class="requiredItem">*</span></td>
                         <td>
-                            <input type="radio" name="type" value="0" checked="checked" />个人
-                            <input type="radio" name="type" value="1" />团队</td>
+                            <select name="type" class="textBoxSingleLine" data-bind="value: type">
+                                <option value="0">个人</option>
+                                <option value="1">团队</option>
+                            </select>
+                        </td>
                         <td class="form_note">单次提名2人及以上时请选择团体，提名1人请选择个人。</td>
                     </tr>
                     <tr class="formSingleLine">
-                        <td class="form_item">TA所在的院系<span class="requiredItem">*</span></td>
+                        <td class="form_item">TA(们)所在的院系<span class="requiredItem">*</span></td>
                         <td>
-                            <select name="department" class="textBoxSingleLine">
-                                <option value="999">N/A</option>
+                            <select name="department" class="textBoxSingleLine" data-bind="value: department">
+                                <option value="999">N/A（TA们来自不同院系）</option>
+                                <option value="999">N/A（TA不是师生或校友）</option>
                                 <option value="001">马克思主义学院</option>
                                 <option value="010">古籍所</option>
                                 <option value="011">中文系</option>
@@ -78,12 +81,12 @@
                                 <option value="301">先进材料实验室</option>
                             </select>
                         </td>
-                        <td class="form_note">请选择被提名人所在院系，如不适用此项，请选择“N/A”</td>
+                        <td class="form_note">如涉及跨院系团队或提名职工等不适用此项时，请选择前两项</td>
                     </tr>
-                     <tr class="formSingleLine">
-                        <td class="form_item">TA是一名<span class="requiredItem">*</span></td>
+                    <tr class="formSingleLine">
+                        <td class="form_item">TA/TA们是<span class="requiredItem">*</span></td>
                         <td>
-                            <select name="intro" class="textBoxSingleLine">
+                            <select name="intro" class="textBoxSingleLine" data-bind="value: role">
                                 <option value="本科毕业生">本科毕业生</option>
                                 <option value="硕士毕业生">硕士毕业生</option>
                                 <option value="博士毕业生">博士毕业生</option>
@@ -99,39 +102,38 @@
                     <tr class="formSingleLine">
                         <td class="form_item">被提名人简介<span class="requiredItem">*</span></td>
                         <td>
-                            <input name="intro" type="text" class="textBoxSingleLine" placeholder="请填写被提名人信息（不超过15个字）" maxlength="20" required="required" /></td>
-                        <td class="form_note">如XX社团社长等</td>
+                            <input name="intro" type="text" class="textBoxSingleLine" data-bind="value: intro" placeholder="请填写被提名人信息（不超过15个字）" maxlength="20" required="required" /></td>
+                        <td class="form_note">已自动完成一部分，可以选择修改或补充bu如“XX社团社长”等身份介绍</td>
                     </tr>
                     <tr class="formSingleLine">
                         <td class="form_item">TA的联系方式</td>
                         <td>
-                            <input name="mobile" type="text" class="textBoxSingleLine" maxlength="20" /></td>
+                            <input name="mobile" type="text" class="textBoxSingleLine" maxlength="20" data-bind="value:tel" /></td>
                         <td class="form_note">仅供工作人员联系被提名人使用</td>
                     </tr>
                     <tr class="formMultipleLine">
-                        <td class="form_item">TA与复旦的故事<span class="requiredItem">*</span></td>
+                        <td class="form_item">TA(们)的故事<span class="requiredItem">*</span></td>
                         <td>
-                            <textarea name="story" class="textBoxMultipleLine" maxlength="150" required="required"></textarea></td>
+                            <textarea name="story" class="textBoxMultipleLine" maxlength="150" required="required" data-bind="value:story"></textarea></td>
                         <td class="form_note">请讲述一个你或TA的复旦故事，可以是一件事，也可以是每天发生的事。<br />
                             最好写出故事发生的时间、地点，以及最重要的故事里你或TA的样子~</td>
                     </tr>
                     <tr class="formSingleLine">
                         <td class="form_item">你的联系方式</td>
                         <td>
-                            <input name="mobile" type="text" class="textBoxSingleLine" maxlength="20" required="required"/></td>
+                            <input name="mobile" type="text" class="textBoxSingleLine" maxlength="50" required="required" data-bind="submitter" /></td>
                         <td class="form_note">仅供工作人员在联系不到被提名人时，联系提名人使用</td>
                     </tr>
                     <tr class="formBtnContainer">
                         <td colspan="2">
                             <div class="form_btn">
-                                <input type="submit" id="submit_addname" class="btn btn_submit formBtn" value="提&nbsp;&nbsp;交" />
+                                <input type="submit" id="submit_addname" class="btn btn_submit formBtn" data-bind="click:submit" value="提&nbsp;&nbsp;交" />
                                 <div class="btn btn_return formBtn"><a href="/hongtan/">返&nbsp;&nbsp;回</a></div>
                                 <div style="clear: both"></div>
                             </div>
                         </td>
                     </tr>
                 </table>
-                <%Html.EndForm(); %>
             </div>
         </div>
     </div>
@@ -141,4 +143,48 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="LeftPagePlaceHolder" runat="server">
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="ScriptPlaceHolder" runat="server">
+    <script>
+        var viewModel = {
+            submit: function () {
+                if(this.name().trim()==''){alert('被提名人姓名不能为空');return;}
+                if(this.intro().trim()==''){alert('被提名人简介不能为空');return;}
+                if(this.story().trim()==''){alert('TA(们)的故事不嫩为空');return;}
+                $.ajax({
+                    type: 'POST',
+                    url: '<%=Url.Action("AddNameSubmit")%>',
+                    data:{
+                        name: this.name().trim(),
+                        type: this.type(),
+                        department:this.department(),
+                        role:this.role(),
+                        intro:this.intro().trim(),
+                        tel:this.tel().trim(),
+                        story:this.story().trim(),
+                        submitter:this.submitter(),
+
+                    },
+                    success: function (data) {
+                        if (data.success) {
+                            alert('提名成功!我们将在24小时内审核你的提名，审核通过后你的提名会出现在投票列表内。')
+                        }
+                        else {
+                            alert(data.message)
+                        }
+                    },
+                    error: function () {
+                        alert('提交失败，请重试')
+                    }
+                });
+            },
+            name: ko.observable(''),
+            type: ko.observable(0),
+            department:ko.observable('000'),
+            role:ko.observable('999'),
+            intro:ko.observable(''),
+            tel:ko.observable(''),
+            story:ko.observable(''),
+            submitter:ko.observable('')
+        };
+        ko.applyBindings(viewModel)
+    </script>
 </asp:Content>

@@ -87,14 +87,6 @@ namespace hongtan.Models
 		
 		private int _Id;
 		
-		private string _Name;
-		
-		private string _Introduction;
-		
-		private string _Tel;
-		
-		private string _Story;
-		
 		private int _RelatedCandidateId;
 		
 		private string _ApplyReason;
@@ -107,14 +99,6 @@ namespace hongtan.Models
     partial void OnCreated();
     partial void OnIdChanging(int value);
     partial void OnIdChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    partial void OnIntroductionChanging(string value);
-    partial void OnIntroductionChanged();
-    partial void OnTelChanging(string value);
-    partial void OnTelChanged();
-    partial void OnStoryChanging(string value);
-    partial void OnStoryChanged();
     partial void OnRelatedCandidateIdChanging(int value);
     partial void OnRelatedCandidateIdChanged();
     partial void OnApplyReasonChanging(string value);
@@ -144,86 +128,6 @@ namespace hongtan.Models
 					this._Id = value;
 					this.SendPropertyChanged("Id");
 					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Introduction", DbType="VarChar(MAX)")]
-		public string Introduction
-		{
-			get
-			{
-				return this._Introduction;
-			}
-			set
-			{
-				if ((this._Introduction != value))
-				{
-					this.OnIntroductionChanging(value);
-					this.SendPropertyChanging();
-					this._Introduction = value;
-					this.SendPropertyChanged("Introduction");
-					this.OnIntroductionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Tel", DbType="VARCHAR(20)")]
-		public string Tel
-		{
-			get
-			{
-				return this._Tel;
-			}
-			set
-			{
-				if ((this._Tel != value))
-				{
-					this.OnTelChanging(value);
-					this.SendPropertyChanging();
-					this._Tel = value;
-					this.SendPropertyChanged("Tel");
-					this.OnTelChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Story", DbType="VARCHAR(MAX)")]
-		public string Story
-		{
-			get
-			{
-				return this._Story;
-			}
-			set
-			{
-				if ((this._Story != value))
-				{
-					this.OnStoryChanging(value);
-					this.SendPropertyChanging();
-					this._Story = value;
-					this.SendPropertyChanged("Story");
-					this.OnStoryChanged();
 				}
 			}
 		}

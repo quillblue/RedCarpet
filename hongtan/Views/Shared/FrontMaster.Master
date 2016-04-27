@@ -26,7 +26,8 @@
         </div>
     </div>
     <script src="/js/search.js"></script>
-    <script src="/js/vote.js"></script>
+    <script src="/js/jquery-1.7.2.js"></script>
+    <!--<script src="/js/vote.js"></script>-->
     <script src="/js/knockout-2.2.0.js"></script>
     <asp:ContentPlaceHolder ID="ScriptPlaceHolder" runat="server"></asp:ContentPlaceHolder>
 </body>

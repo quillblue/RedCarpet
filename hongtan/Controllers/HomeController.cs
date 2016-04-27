@@ -70,32 +70,28 @@ namespace hongtan.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddNameSubmit()
+        public ActionResult AddNameSubmit(CandidateModel cm)
         {
             try
             {
-                CandidateModel cm = new CandidateModel();
                 cm.BidCount = 0;
                 cm.Hidden = 1;
                 cm.Priority = 0;
-                cm.Name = Request.Form["name"];
-                cm.Introduction = Request.Form["intro"];
-                cm.Tel = Request.Form["mobile"];
-                cm.Story = Request.Form["story"];
-                cm.Type = Convert.ToInt32(Request.Form["type"]);
+                cm.BidAdjust = 0;
                 CandidateRepository cr = new CandidateRepository();
-                int duplicateId = cr.GetDuplicateId(cm.Name);
+                int duplicateId = cr.CheckDuplicate(cm);
+                if (duplicateId == -2) { return Json(new { success = false, message="提名失败，被提名对象已经存在。如果在投票页面上没有见到，可能处于审核状态。" }); }
                 if (duplicateId != -1)
                 {
                     cm.Type = cm.Type + 10 * duplicateId;
                 }
                 cr.Insert(cm);
                 cr.Save();
-                return Content("<script>alert('提名成功，经过审核后您的提名将会出现在投票列表中，感谢您的参与！');location.replace('http://stu.fudan.edu.cn/hongtan/');</script>", "text/html");
+                return Json(new { success = true});
             }
             catch (Exception e)
             {
-                return Content("<script>alert('提交失败，请稍后重试。错误信息：" + e.Message.ToString() + "');location.replace('http://stu.fudan.edu.cn/hongtan/');</script>", "text/html");
+                return Json(new { success=false,message=e.Message});
             }
 
         }
@@ -115,9 +111,6 @@ namespace hongtan.Controllers
                 EditApplyModel eam = new EditApplyModel();
                 eam.ApplierTel = Request.Form["applier_tel"];
                 eam.ApplyReason = Request.Form["reason"];
-                eam.Introduction = Request.Form["intro"];
-                eam.Name = Request.Form["name"];
-                eam.Story = Request.Form["story"];
                 eam.RelatedCandidateId = Convert.ToInt32(Request.Form["relatedId"]);
                 CandidateRepository cr = new CandidateRepository();
                 cr.ApplyEdit(eam);

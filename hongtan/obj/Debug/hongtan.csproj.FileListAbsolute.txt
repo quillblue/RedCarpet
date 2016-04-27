@@ -112,7 +112,6 @@ E:\Projects\0.DONE\hongtan\hongtan\bin\zh-Hans\System.Web.Razor.resources.dll
 E:\Projects\0.DONE\hongtan\hongtan\bin\zh-Hans\System.Web.WebPages.resources.dll
 E:\Projects\0.DONE\hongtan\hongtan\bin\zh-Hans\System.Web.WebPages.Deployment.resources.dll
 E:\Projects\0.DONE\hongtan\hongtan\bin\zh-Hans\System.Web.WebPages.Razor.resources.dll
-E:\Projects\0.DONE\hongtan\hongtan\obj\Debug\hongtan.csprojResolveAssemblyReference.cache
 E:\Projects\0.DONE\hongtan\hongtan\bin\System.Net.Http.Formatting.dll
 E:\Projects\0.DONE\hongtan\hongtan\bin\System.Web.Http.dll
 E:\Projects\0.DONE\hongtan\hongtan\bin\System.Web.Http.WebHost.dll
@@ -122,3 +121,4 @@ E:\Projects\0.DONE\hongtan\hongtan\bin\System.Web.Http.WebHost.xml
 E:\Projects\0.DONE\hongtan\hongtan\bin\zh-Hans\System.Net.Http.Formatting.resources.dll
 E:\Projects\0.DONE\hongtan\hongtan\bin\zh-Hans\System.Web.Http.resources.dll
 E:\Projects\0.DONE\hongtan\hongtan\bin\zh-Hans\System.Web.Http.WebHost.resources.dll
+E:\Projects\0.DONE\hongtan\hongtan\obj\Debug\hongtan.csprojResolveAssemblyReference.cache

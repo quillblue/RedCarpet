@@ -56,9 +56,19 @@ namespace hongtan.Models
             return cl;
         }
 
-        public int GetDuplicateId(String name) {
-            List<CandidateModel> cl = db.CandidateModel.Where(c => c.Name == name).ToList<CandidateModel>();
-            if (cl.Count > 0) { return cl.First().Id; }
+        /// <summary>
+        /// Check duplicate candidate in db
+        /// </summary>
+        /// <param name="target"></param>
+        /// <returns>-2:Serious Duplicate, -1: No duplicate, >0:potential duplicate with duplicate id</returns>
+        public int CheckDuplicate(CandidateModel target) {
+            List<CandidateModel> cl = db.CandidateModel.Where(c => c.Name == target.Name).ToList<CandidateModel>();
+            if (cl.Count > 0) {
+                foreach (CandidateModel cm in cl) {
+                    if (cm.Department == target.Department && cm.Role == target.Role) { return -2; }
+                }
+                return cl.First().Id; 
+            }
             else { return -1; }
         }
 
@@ -101,17 +111,6 @@ namespace hongtan.Models
             candidate.Introduction = cm.Introduction;
             candidate.Story = cm.Story;
             candidate.Priority = cm.Priority;
-            db.SubmitChanges();
-        }
-
-        public void AcceptEditApply(int id)
-        {
-            EditApplyModel eam = db.EditApplyModel.First(e => e.Id == id);
-            CandidateModel candidate = db.CandidateModel.First(c => c.Id == eam.RelatedCandidateId);
-            candidate.Name = eam.Name;
-            candidate.Introduction = eam.Introduction;
-            candidate.Story = eam.Story;
-            db.EditApplyModel.DeleteOnSubmit(eam);
             db.SubmitChanges();
         }
 

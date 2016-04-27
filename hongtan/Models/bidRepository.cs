@@ -12,12 +12,12 @@ namespace hongtan.Models
         
         public void Insert(BidModel b)
         {
-            db.hongtan_Vote.InsertOnSubmit(b);
+            db.BidModel.InsertOnSubmit(b);
         }
 
         public bool CheckDuplicate(string IP, DateTime date) 
         {
-            var queryCheckResult = from BidModel in db.hongtan_Vote
+            var queryCheckResult = from BidModel in db.BidModel
                               where BidModel.VoterIP == IP && BidModel.VoteDate == date
                               select BidModel;
             if (queryCheckResult.Count() == 0)

@@ -2,10 +2,6 @@
   <Table Name="dbo.Hongtan_EditApply" Member="EditApplyModel">
     <Type Name="EditApplyModel">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Introduction" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="Tel" Type="System.String" DbType="VARCHAR(20)" CanBeNull="true" />
-      <Column Name="Story" Type="System.String" DbType="VARCHAR(MAX)" CanBeNull="true" />
       <Column Name="RelatedCandidateId" Type="System.Int32" DbType="INT" CanBeNull="false" />
       <Column Name="ApplyReason" Type="System.String" CanBeNull="false" />
       <Column Name="ApplierTel" Type="System.String" CanBeNull="false" />
