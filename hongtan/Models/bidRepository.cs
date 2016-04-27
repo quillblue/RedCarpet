@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 
@@ -7,8 +8,8 @@ namespace hongtan.Models
 {
     public class bidRepository
     {
-        private bidDataContext db = new bidDataContext();
-
+        private bidDataContext db = new bidDataContext(ConfigurationManager.ConnectionStrings["LocalTestConnectionString"].ConnectionString);
+        
         public void Insert(BidModel b)
         {
             db.hongtan_Vote.InsertOnSubmit(b);

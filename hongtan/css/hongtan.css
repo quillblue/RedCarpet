@@ -1,124 +1,230 @@
 html {
-	font-family: "微软雅黑",Arial,"san-serif";
-	font-size:14px;
-	color: #7c7878;	
+    font-family: "微软雅黑",Arial,"san-serif";
+    font-size: 14px;
+    color: #7c7878;
 }
 
-body{
-	background-color: #f3f3f3;
-	line-height: 150%;
+body {
+    background-color: #f3f3f3;
+    line-height: 150%;
 }
 
-a{
-	text-decoration: none;
+a {
+    text-decoration: none;
+    color: #999;
 }
 
-.container{
-	width: 960px;
-	margin: 0 auto;
+    a:hover {
+        color: #666;
+    }
+
+td {
+    word-wrap: break-word;
 }
 
-.banner{
-	margin: 20px 10px;
+.container {
+    width: 960px;
+    margin: 0 auto;
 }
 
-	.left_page{
-		float: left;
-		width: 640px;
-	}
+.banner {
+    margin: 20px 10px;
+    border-radius: 3px;
+    box-shadow: 1px 1px 1px #d5d5d5;
+    background-color: #fff;
+}
 
-	.right_page{
-		float: left;
-		width: 300px;
-		margin:10px;
-	}
-
-	.vote_card{
-		float: left;
-		width: 270px;
-		height: 135px;
-		margin:10px 10px;
-		padding: 15px 15px;
-		border-radius:3px;
-		box-shadow: 1px 1px 1px #d5d5d5;
-		background-color: #fff;	
-	}
-
-		.vote_info{
-			line-height: 150%;
-		}
-
-		.vote_info .table_singleline{
-			line-height: 180%;
-		}
-		.vote_info .table_multiline{
-			height: 84px;
-		}
-		.vote_label{
-			width: 45px;
-			font-weight: bold;
-			color: #999;
-		}
-		.vote_bidCount{
-			width: 140px;
-		}
+.rule {
+    padding: 20px 30px;
+}
 
 
+.vote_card {
+    float: left;
+    width: 430px;
+    height: 190px;
+    margin: 10px 10px;
+    padding: 15px 15px;
+    border-radius: 3px;
+    box-shadow: 1px 1px 1px #d5d5d5;
+    background-color: #fff;
+}
 
-	.right_coloum{
-		margin-bottom: 20px;
-		padding: 30px 20px;
-		border-radius:3px;
-		box-shadow: 1px 1px 1px #d5d5d5;
-		background-color: #fff;	
-	}
+.vote_info {
+    line-height: 150%;
+}
 
-		.right_page_title{
-			font-size: 28px;
-			color: #d34c41;
-		}
+    .vote_info .table_singleline {
+        line-height: 180%;
+    }
 
-		.intro{
-			line-height: 180%;
-			margin-top: 20px;
-		}
+    .vote_info .table_multiline {
+        height: 115px;
+        text-indent: 2em;
+        padding-top: 5px;
+    }
 
-		.right_form{
-			line-height: 180%;
-			margin-top: 25px;
-		}
+.vote_label {
+    width: 45px;
+    font-weight: bold;
+    color: #999;
+}
 
-			.right_form p{
-				margin-top: 5px;
-			}
+.vote_label_name {
+    font-size: 16px;
+    font-weight: bold;
+    color: #999;
+}
 
-			.add_name{
-				width: 182px;
-			}
+.vote_bidCount {
+    width: 300px;
+}
 
-			.add_intro{
-				width: 250px;
-				height: 60px;
-			}
-	.btn_container{
-		text-align: center;
-		margin-top: 10px;
-	}
-	.btn_submit{
-		width: 100px;
-		line-height: 180%;
-		background-color:#d34c41;
-		border-width: 0px;
-		border-radius:3px;
-		box-shadow: 1px 1px 1px #d5d5d5;
-		font-family: "微软雅黑";
-		font-size: 16px;
-		color: #fff; 
-	}
-		.btn_submit:hover{
-			background-color: #ee8077;
-		}
-	#submit_vote{
-		font-size: 20px;
-		width: 150px;
-	}
+
+.right_page_title {
+    font-size: 28px;
+    color: #d34c41;
+}
+
+.intro {
+    line-height: 180%;
+    margin-top: 20px;
+}
+
+#toolbar{
+    width:100%;
+    display:inline-block;
+    margin:25px 0 5px 0;
+}
+
+#addNameBtn {
+    width:300px;
+    float:left;
+}
+
+#searchBar {
+    float:right;
+    width:300px;
+    line-height:180%;
+    margin-top:5px;
+}
+
+#searchInput {
+    width:150px;
+    height:25px;
+    margin-right:10px;
+    float:left;
+}
+
+
+.btn_container {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.btn {
+    border-width: 0px;
+    border-radius: 3px;
+    box-shadow: 1px 1px 1px #d5d5d5;
+    font-family: "微软雅黑";
+    font-size: 16px;
+    background-color: #d34c41;
+    color: #fff;
+    text-align:center;
+}
+
+    .btn:hover {
+        background-color: #ee8077;
+    }
+
+.btn_submit {
+    width: 100px;
+    line-height: 180%;
+    margin:0 10px;
+}
+
+
+
+.btn_return {
+    width: 100px;
+    height:29px;
+    background-color: #999;
+
+}
+    .btn_return:hover {
+        background-color: #666;
+    }
+
+    .btn_return a {
+        color:#fff;
+        line-height: 180%;
+    }
+
+.btn_addName {
+    font-size:20px;
+    width:130px;
+    line-height:200%;
+}
+
+.btn_searchSubmit {
+    float:left;
+    width:80px;
+    line-height:190%;
+}
+
+#submit_vote {
+    font-size: 20px;
+    width: 150px;
+}
+
+/* AddName and EditApply Part*/
+.formContainer {
+    margin-left:20px;
+}
+
+.intro td {
+    vertical-align:top;
+}
+
+.requiredItem {
+    color: #f00;
+}
+
+.formSingleLine {
+    height:35px;
+}
+
+.formMultipleLine {
+    height:165px;
+}
+
+.form_item {
+    width:120px;
+}
+
+.form_note {
+    color:#999;
+}
+
+.textBoxSingleLine{
+    width:250px;
+    margin-right:20px;
+}
+
+.textBoxMultipleLine {
+    margin-top:2px;
+    width:250px;
+    height:140px;
+}
+
+.formBtnContainer {
+    text-align:center;
+}
+
+.formBtn {
+    float:left;
+}
+
+.form_btn {
+    display:inline-block;
+}

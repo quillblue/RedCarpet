@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using hongtan.Models;
+using System.Web.Security;
 
 namespace hongtan.Controllers
 {
@@ -17,6 +18,22 @@ namespace hongtan.Controllers
             return View();
         }
 
+        public ActionResult Login() {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult LoginSubmit() {
+            if (Request.Form["Passwd"] == "Hongtan2015")
+            {
+                FormsAuthentication.SetAuthCookie("admin", true);
+                return Content("<script>location.replace('http://stu.fudan.edu.cn/hongtan/admin/ManageNew');</script>", "text/html");
+            }
+            else {
+                return Content("<script>location.replace('http://stu.fudan.edu.cn/hongtan/admin/Login');</script>", "text/html");
+            }
+        }
+
         [Authorize]
         public ActionResult ManageNew()
         {
@@ -25,6 +42,7 @@ namespace hongtan.Controllers
             return View(NewCanList);
         }
 
+        [Authorize]
         public ActionResult CurrentVote()
         {
             CandidateRepository cr = new CandidateRepository();
@@ -32,7 +50,18 @@ namespace hongtan.Controllers
             return View(NewCanList);
         }
 
-        [HttpGet]
+        [Authorize]
+        public ActionResult ManageEditApply() {
+            CandidateRepository cr = new CandidateRepository();
+            List<EditApplyModel> EditApplyList = cr.GetAllEditApply(); ;
+            List<ManageEditApplyDisplayModel> displayList = new List<ManageEditApplyDisplayModel>();
+            foreach (EditApplyModel eam in EditApplyList) {
+                displayList.Add(new ManageEditApplyDisplayModel(eam));
+            }
+            return View(displayList);
+        }
+
+        [Authorize]
         public ActionResult Edit(int id)
         {
             CandidateRepository cr = new CandidateRepository();
@@ -40,6 +69,7 @@ namespace hongtan.Controllers
             return View(cm);
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult Edit()
         {
@@ -49,7 +79,9 @@ namespace hongtan.Controllers
                 CandidateModel cm = new CandidateModel();
                 cm.Id = Convert.ToInt32(Request.Form["Edit_Id"]);
                 cm.Name = Request.Form["Edit_Name"];
+                cm.Tel = Request.Form["Edit_Tel"];
                 cm.Introduction = Request.Form["Edit_Introduction"];
+                cm.Story = Request.Form["Edit_Story"];
                 cm.Priority = Convert.ToInt32(Request.Form["Edit_Priority"]);
                 cr.Update(cm);
                 return Content("<script>alert('操作成功！');location.replace('http://stu.fudan.edu.cn/hongtan/admin/');</script>", "text/html");
@@ -61,6 +93,7 @@ namespace hongtan.Controllers
 
         }
 
+        [Authorize]
         public ActionResult Delete(int id)
         {
             CandidateRepository cr = new CandidateRepository();
@@ -75,6 +108,8 @@ namespace hongtan.Controllers
                 return Content("<script>alert('删除失败，请稍后重试！');location.replace('http://stu.fudan.edu.cn/hongtan/admin/');</script>", "text/html");
             }
         }
+
+        [Authorize]
         public ActionResult SwitchDisplay(int id)
         {
             CandidateRepository cr = new CandidateRepository();
@@ -87,6 +122,21 @@ namespace hongtan.Controllers
             {
                 return Content("<script>alert('操作失败，请稍后重试！');location.replace('http://stu.fudan.edu.cn/hongtan/admin/');</script>", "text/html");
             }
+        }
+
+        [Authorize]
+        public ActionResult DeleteEditApply(int id) {
+            try
+            {
+                CandidateRepository cr = new CandidateRepository();
+                cr.RejectEditApply(id);
+                return Content("<script>alert('操作成功！');location.replace('http://stu.fudan.edu.cn/hongtan/admin/ManageEditApply');</script>", "text/html");
+            }
+            catch (Exception e)
+            {
+                return Content("<script>alert('操作失败，请稍后重试！');location.replace('http://stu.fudan.edu.cn/hongtan/admin/ManageEditApply');</script>", "text/html");
+            }
+            
         }
 
     }

@@ -109,6 +109,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StoryController.cs" />
@@ -127,16 +128,31 @@
       <DependentUpon>CandidateModel.dbml</DependentUpon>
     </Compile>
     <Compile Include="Models\CandidateRepository.cs" />
+    <Compile Include="Models\ManageEditApplyDisplayModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="App_Data\Hongtan.mdf" />
+    <Content Include="App_Data\Hongtan_log.ldf">
+      <DependentUpon>Hongtan.mdf</DependentUpon>
+    </Content>
+    <Content Include="css\admin.css" />
+    <Content Include="css\bootstrap.css" />
+    <Content Include="css\hongtan.css" />
+    <Content Include="css\reset.css" />
     <Content Include="Global.asax" />
+    <Content Include="js\jquery-1.7.2.min.js" />
+    <Content Include="js\search.js" />
+    <Content Include="Views\Admin\Login.aspx" />
     <Content Include="Views\Admin\CurrentVote.aspx" />
     <Content Include="Views\Admin\Edit.aspx" />
+    <Content Include="Views\Admin\ManageEditApply.aspx" />
     <Content Include="Views\Admin\ManageNew.aspx" />
+    <Content Include="Views\Home\AddName.aspx" />
+    <Content Include="Views\Home\EditApply.aspx" />
     <Content Include="Views\Home\Vote.aspx" />
     <Content Include="Views\Home\VoteItem.ascx" />
     <Content Include="Web.config">
@@ -150,9 +166,7 @@
     </Content>
     <Content Include="Views\Web.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>

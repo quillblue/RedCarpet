@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Vote" Class="bidDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=10.73.4.41;Initial Catalog=Vote;User ID=Vote" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="VoteConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.hongtan_Vote" Member="hongtan_Vote">
+  <Table Name="dbo.Hongtan_Vote" Member="hongtan_Vote">
     <Type Name="BidModel">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="VoterIP" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />

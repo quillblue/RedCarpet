@@ -32,7 +32,7 @@ body{
 
 table{
 	min-width: 600px;
-	line-height: 180%;
+	line-height: 150%;
 }
 thead{
 	text-align: center;
@@ -40,9 +40,10 @@ thead{
 td{
 	border:1px solid #999;
 	vertical-align: middle;
+    word-wrap: break-word;
 }
 tr{
-	line-height: 250%;
+	line-height: 150%;
 }
 .table_short{
 	text-align: center;
@@ -50,4 +51,12 @@ tr{
 }
 .table_long{
 	line-height: 150%;
+}
+
+.admin_edit_short {
+    width:90%;
+}
+
+.changedArea {
+    color:#3366ff;
 }
