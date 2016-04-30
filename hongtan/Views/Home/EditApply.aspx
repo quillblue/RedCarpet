@@ -16,16 +16,29 @@
             <%Html.BeginForm("EditApplySubmit", "Home"); %>
             <table>
                 <tr class="formSingleLine">
+                    <td class="form_item">相关被提名人</td>
+                    <td colspan="2"><%=Model.Name +"("+Model.Introduction+")"%></td>
+                    <td class="form_note"></td>
+                </tr>
+                <tr class="formSingleLine">
                     <td class="form_item">你的联系方式<span class="requiredItem">*</span></td>
                     <td><input name="applier_tel" type="text" class="textBoxSingleLine" maxlength="20" required="required"/></td>
                     <td class="form_note">仅供工作人员联系你核实信息使用</td>
                 </tr>
                 <tr class="formMultipleLine">
-                    <td class="form_item">更正的内容与说明</td>
-                    <td><textarea name="reason" class="textBoxMultipleLine" placeholder=""></textarea></td>
-                    <td class="form_note">阐述需要更正内容与理由</td>
+                    <td class="form_item">更正的内容与说明<span class="requiredItem">*</span></td>
+                    <td><textarea name="reason" class="textBoxMultipleLine" placeholder="指出描述您需要更正的内容，并简要说明原因" required="required"></textarea></td>
                 </tr>
+                <tr class="formBtnContainer">
+                        <td colspan="2">
+                            <div class="form_btn">
+                                <input type="submit" id="submit_addname" class="btn btn_submit formBtn" value="提&nbsp;&nbsp;交" />
+                                <div style="clear: both"></div>
+                            </div>
+                        </td>
+                    </tr>
             </table>
+            <input type="hidden" name="relatedId" value="<%=Model.Id %>" />
             <%Html.EndForm(); %>
         </div>
             </div>

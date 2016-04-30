@@ -1,4 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Hongtan" Class="CandidateModelDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\Hongtan.mdf;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="HongtanConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Hongtan_EditApply" Member="EditApplyModel">
     <Type Name="EditApplyModel">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -10,18 +11,19 @@
   <Table Name="dbo.Hongtan_Candidate" Member="CandidateModel">
     <Type Name="CandidateModel">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Department" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
-      <Column Name="Role" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Introduction" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Tel" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="Story" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Department" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="Role" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="Introduction" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Tel" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Story" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="BidCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="BidAdjust" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Hidden" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Priority" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Type" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="SeemsDuplicate" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Submitter" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

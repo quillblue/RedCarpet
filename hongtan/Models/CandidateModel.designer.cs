@@ -38,6 +38,12 @@ namespace hongtan.Models
     partial void DeleteCandidateModel(CandidateModel instance);
     #endregion
 		
+		public CandidateModelDataContext() : 
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["HongtanConnectionString"].ConnectionString, mappingSource)
+		{
+			OnCreated();
+		}
+		
 		public CandidateModelDataContext(string connection) : 
 				base(connection, mappingSource)
 		{
@@ -225,7 +231,7 @@ namespace hongtan.Models
 		
 		private string _Department;
 		
-		private System.Nullable<int> _Role;
+		private string _Role;
 		
 		private string _Introduction;
 		
@@ -245,6 +251,8 @@ namespace hongtan.Models
 		
 		private bool _SeemsDuplicate;
 		
+		private string _Submitter;
+		
     #region 可扩展性方法定义
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -255,7 +263,7 @@ namespace hongtan.Models
     partial void OnNameChanged();
     partial void OnDepartmentChanging(string value);
     partial void OnDepartmentChanged();
-    partial void OnRoleChanging(System.Nullable<int> value);
+    partial void OnRoleChanging(string value);
     partial void OnRoleChanged();
     partial void OnIntroductionChanging(string value);
     partial void OnIntroductionChanged();
@@ -275,6 +283,8 @@ namespace hongtan.Models
     partial void OnTypeChanged();
     partial void OnSeemsDuplicateChanging(bool value);
     partial void OnSeemsDuplicateChanged();
+    partial void OnSubmitterChanging(string value);
+    partial void OnSubmitterChanged();
     #endregion
 		
 		public CandidateModel()
@@ -302,7 +312,7 @@ namespace hongtan.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string Name
 		{
 			get
@@ -322,7 +332,7 @@ namespace hongtan.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Department", DbType="VarChar(10)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Department", DbType="NVarChar(10)")]
 		public string Department
 		{
 			get
@@ -342,8 +352,8 @@ namespace hongtan.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Role", DbType="Int")]
-		public System.Nullable<int> Role
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Role", DbType="NVarChar(10)")]
+		public string Role
 		{
 			get
 			{
@@ -362,7 +372,7 @@ namespace hongtan.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Introduction", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Introduction", DbType="NVarChar(50)")]
 		public string Introduction
 		{
 			get
@@ -382,7 +392,7 @@ namespace hongtan.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Tel", DbType="VarChar(20)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Tel", DbType="NVarChar(20)")]
 		public string Tel
 		{
 			get
@@ -402,7 +412,7 @@ namespace hongtan.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Story", DbType="VarChar(MAX)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Story", DbType="NVarChar(MAX)")]
 		public string Story
 		{
 			get
@@ -538,6 +548,26 @@ namespace hongtan.Models
 					this._SeemsDuplicate = value;
 					this.SendPropertyChanged("SeemsDuplicate");
 					this.OnSeemsDuplicateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Submitter", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string Submitter
+		{
+			get
+			{
+				return this._Submitter;
+			}
+			set
+			{
+				if ((this._Submitter != value))
+				{
+					this.OnSubmitterChanging(value);
+					this.SendPropertyChanging();
+					this._Submitter = value;
+					this.SendPropertyChanged("Submitter");
+					this.OnSubmitterChanged();
 				}
 			}
 		}

@@ -144,7 +144,9 @@
     <Content Include="css\hongtan.css" />
     <Content Include="css\reset.css" />
     <Content Include="Global.asax" />
+    <Content Include="js\admin.js" />
     <Content Include="js\jquery-1.7.2.min.js" />
+    <Content Include="js\knockout-2.2.0.js" />
     <Content Include="js\search.js" />
     <Content Include="Views\Admin\Login.aspx" />
     <Content Include="Views\Admin\CurrentVote.aspx" />

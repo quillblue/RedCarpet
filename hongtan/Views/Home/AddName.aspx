@@ -35,7 +35,7 @@
                     <tr class="formSingleLine">
                         <td class="form_item">TA(们)所在的院系<span class="requiredItem">*</span></td>
                         <td>
-                            <select name="department" class="textBoxSingleLine" data-bind="value: department">
+                            <select name="department" id="select-dept" class="textBoxSingleLine" data-bind="value: department">
                                 <option value="999">N/A（TA们来自不同院系）</option>
                                 <option value="999">N/A（TA不是师生或校友）</option>
                                 <option value="001">马克思主义学院</option>
@@ -100,10 +100,10 @@
                         <td class="form_note"></td>
                     </tr>
                     <tr class="formSingleLine">
-                        <td class="form_item">被提名人简介<span class="requiredItem">*</span></td>
+                        <td class="form_item">被提名人简介</td>
                         <td>
-                            <input name="intro" type="text" class="textBoxSingleLine" data-bind="value: intro" placeholder="请填写被提名人信息（不超过15个字）" maxlength="20" required="required" /></td>
-                        <td class="form_note">已自动完成一部分，可以选择修改或补充bu如“XX社团社长”等身份介绍</td>
+                            <input name="intro" type="text" class="textBoxSingleLine" data-bind="value: intro" placeholder="请填写被提名人信息（不超过15个字）" maxlength="20" /></td>
+                        <td class="form_note">如果被提名人为在校师生，系统会在提交后自动补充"XX系学生/教师"字样</td>
                     </tr>
                     <tr class="formSingleLine">
                         <td class="form_item">TA的联系方式</td>
@@ -121,14 +121,14 @@
                     <tr class="formSingleLine">
                         <td class="form_item">你的联系方式</td>
                         <td>
-                            <input name="mobile" type="text" class="textBoxSingleLine" maxlength="50" required="required" data-bind="submitter" /></td>
+                            <input name="mobile" type="text" class="textBoxSingleLine" maxlength="50" required="required" data-bind="value:submitter" /></td>
                         <td class="form_note">仅供工作人员在联系不到被提名人时，联系提名人使用</td>
                     </tr>
                     <tr class="formBtnContainer">
                         <td colspan="2">
                             <div class="form_btn">
                                 <input type="submit" id="submit_addname" class="btn btn_submit formBtn" data-bind="click:submit" value="提&nbsp;&nbsp;交" />
-                                <div class="btn btn_return formBtn"><a href="/hongtan/">返&nbsp;&nbsp;回</a></div>
+                                <div class="btn btn_return formBtn"><a href="<%=Url.Action("Vote","Home") %>">返&nbsp;&nbsp;回</a></div>
                                 <div style="clear: both"></div>
                             </div>
                         </td>
@@ -147,8 +147,16 @@
         var viewModel = {
             submit: function () {
                 if(this.name().trim()==''){alert('被提名人姓名不能为空');return;}
-                if(this.intro().trim()==''){alert('被提名人简介不能为空');return;}
                 if(this.story().trim()==''){alert('TA(们)的故事不嫩为空');return;}
+                var intro=''
+                if(this.department!='999'){intro=$('#select-dept').find('option:selected').text();}
+                if (this.role != '') {
+                    intro += this.role()
+                    if (intro != '') { intro = intro + ' ' + this.intro().trim() }
+                }
+                else {
+                    intro = this.intro().trim()
+                }
                 $.ajax({
                     type: 'POST',
                     url: '<%=Url.Action("AddNameSubmit")%>',
@@ -157,7 +165,7 @@
                         type: this.type(),
                         department:this.department(),
                         role:this.role(),
-                        intro:this.intro().trim(),
+                        introduction:intro.trim(),
                         tel:this.tel().trim(),
                         story:this.story().trim(),
                         submitter:this.submitter(),
@@ -185,6 +193,10 @@
             story:ko.observable(''),
             submitter:ko.observable('')
         };
-        ko.applyBindings(viewModel)
+        
+        $(document).ready(function () {
+            ko.applyBindings(viewModel)
+            
+        })
     </script>
 </asp:Content>

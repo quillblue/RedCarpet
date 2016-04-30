@@ -6,9 +6,9 @@
 <head>
     <meta charset="utf-8" />
     <title>复旦大学2016年毕业晚会红毯入场仪式投票</title>
-    <link rel="stylesheet" type="text/css" href="/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="/css/hongtan.css">
-    <script language="javascript" src="js/jquery-1.7.2.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="<%=Url.Content("/css/reset.css") %>">
+    <link rel="stylesheet" type="text/css" href="<%=Url.Content("/css/hongtan.css") %>">
+    <script language="javascript" src="<%=Url.Content("/js/jquery-1.7.2.min.js") %>"></script>
     <asp:ContentPlaceHolder ID="HeadPlaceHolder" runat="server"></asp:ContentPlaceHolder>
 
 </head>
@@ -25,10 +25,9 @@
             <asp:ContentPlaceHolder ID="LeftPagePlaceHolder" runat="server"></asp:ContentPlaceHolder>
         </div>
     </div>
-    <script src="/js/search.js"></script>
-    <script src="/js/jquery-1.7.2.js"></script>
+    <script src="<%=Url.Content("/js/search.js") %>"></script>
     <!--<script src="/js/vote.js"></script>-->
-    <script src="/js/knockout-2.2.0.js"></script>
+    <script src="<%=Url.Content("/js/knockout-2.2.0.js") %>"></script>
     <asp:ContentPlaceHolder ID="ScriptPlaceHolder" runat="server"></asp:ContentPlaceHolder>
 </body>
 </html>

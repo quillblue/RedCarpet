@@ -4,41 +4,46 @@
 
 <html>
 <head>
-	<meta charset="utf-8"/>
-	<title>管理后台 复旦大学2016年毕业晚会红毯入场仪式投票</title>
-	<link rel="stylesheet" type="text/css" href="/hongtan/css/reset.css">
-	<!--<link rel="stylesheet" type="text/css" href="../css/bootstrap.css">-->
-	<link rel="stylesheet" type="text/css" href="/hongtan/css/admin.css">
-    <%--<link rel="stylesheet" type="text/css" href="/css/reset.css">
-	<!--<link rel="stylesheet" type="text/css" href="../css/bootstrap.css">-->
-	<link rel="stylesheet" type="text/css" href="/css/admin.css">--%>
-
+    <meta charset="utf-8" />
+    <title>管理后台 复旦大学2016年毕业晚会红毯入场仪式投票</title>
+    <link rel="stylesheet" type="text/css" href="<%=Url.Content("/css/reset.css") %>" />
+    <link rel="stylesheet" type="text/css" href="<%=Url.Content("/css/bootstrap.css") %>" />
+    <link rel="stylesheet" type="text/css" href="<%=Url.Content("/css/admin.css") %>" />
 </head>
 <body>
-	<div class="nav">
-		<ul>
-			<li>管理后台</li>
-			<li>==============</li>
-			<li><a href="ManageNew">>>审核新提名</a></li>
-            <li><a href="ManageEditApply">>>审核信息修改申请</a></li>
-			<li><a href="CurrentVote">>>查看目前投票情况</a></li>
-		</ul>
-	</div>
-	<div class="content">
-		<div class="content_title"><asp:ContentPlaceHolder ID="titleHolder" runat="server"></asp:ContentPlaceHolder></div>
-		<table class="table-hover" border="1">
-			<thead>
-			<tr>
-                <asp:ContentPlaceHolder ID="THeadHolder" runat="server"></asp:ContentPlaceHolder>
-				
-			</tr>
-			</thead>
-            <tbody>
-			<asp:ContentPlaceHolder ID="ContentHolder" runat="server"></asp:ContentPlaceHolder>
-			</tbody>
-		</table>
-	</div>
-	<div style="clear:both"></div>
+    <div class="header">
+        <nav class="navbar navbar-default">
+            <div class="headerContainer">
+                <span class="navbar-brand">
+                    管理后台</span>
+                <ul class="nav navbar-nav">
+                    <li><a href="<%=Url.Action("ManageNew","Admin") %>">审核新提名</a></li>
+                    <li><a href="<%=Url.Action("ManageEditApply","Admin") %>">审核信息修改申请</a></li>
+                    <li><a href="<%=Url.Action("CurrentVote","Admin") %>">目前投票情况</a></li>
+                    <li><a href="<%=Url.Action("SuperAdminPanel","Admin") %>">9又3/4站台</a></li>
+                </ul>
+                <p class="navbar-text navbar-right"><%=HttpContext.Current.User.Identity.Name %></p>
+            </div>
+        </nav>
+    </div>
+    <div class="content">
+        <div class="content_title">
+            <asp:ContentPlaceHolder ID="titleHolder" runat="server"></asp:ContentPlaceHolder>
+        </div>
+        <table class="table table-bordered table-hover">
+            <asp:ContentPlaceHolder ID="TableHolder" runat="server"></asp:ContentPlaceHolder>
+
+            <asp:ContentPlaceHolder ID="THeadHolder" runat="server"></asp:ContentPlaceHolder>
+
+
+            <asp:ContentPlaceHolder ID="ContentHolder" runat="server"></asp:ContentPlaceHolder>
+        </table>
+    </div>
+    <div style="clear: both"></div>
+    <script type="text/javascript" src="<%=Url.Content("/js/admin.js") %>"></script>
+    <script type="text/javascript" src="<%=Url.Content("/js/jquery-1.7.2.min.js") %>"></script>
+    <script type="text/javascript" src="<%=Url.Content("/js/knockout-2.2.0.js") %>"></script>
+    <asp:ContentPlaceHolder ID="ScriptHolder" runat="server"></asp:ContentPlaceHolder>
 </body>
 </html>
 

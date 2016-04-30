@@ -28,6 +28,13 @@ namespace hongtan.Models
             db.SubmitChanges();
         }
 
+        public void BeAdjusted(int id, int adjustAmount) {
+            CandidateModel candidate = db.CandidateModel.First(c => c.Id == id);
+            candidate.BidCount += adjustAmount;
+            candidate.BidAdjust += adjustAmount;
+            db.SubmitChanges();
+        }
+
         public List<CandidateModel> GetAllHidden()
         {
             List<CandidateModel> cl = new List<CandidateModel>();

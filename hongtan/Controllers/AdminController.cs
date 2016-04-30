@@ -24,9 +24,14 @@ namespace hongtan.Controllers
 
         [HttpPost]
         public ActionResult LoginSubmit() {
-            if (Request.Form["Passwd"] == "Hongtan2015")
+            if (Request.Form["Passwd"] == "Hongtan2016")
             {
                 FormsAuthentication.SetAuthCookie("admin", true);
+                return Content("<script>location.replace('http://stu.fudan.edu.cn/hongtan/admin/ManageNew');</script>", "text/html");
+            }
+            if (Request.Form["Passwd"] == "ArtTroupe503")
+            {
+                FormsAuthentication.SetAuthCookie("Super", true);
                 return Content("<script>location.replace('http://stu.fudan.edu.cn/hongtan/admin/ManageNew');</script>", "text/html");
             }
             else {
@@ -34,7 +39,7 @@ namespace hongtan.Controllers
             }
         }
 
-        [Authorize]
+        //[Authorize]
         public ActionResult ManageNew()
         {
             CandidateRepository cr = new CandidateRepository();
@@ -42,7 +47,7 @@ namespace hongtan.Controllers
             return View(NewCanList);
         }
 
-        [Authorize]
+        //[Authorize]
         public ActionResult CurrentVote()
         {
             CandidateRepository cr = new CandidateRepository();
@@ -62,6 +67,18 @@ namespace hongtan.Controllers
         }
 
         //[Authorize]
+        public ActionResult GetAllEditApply() {
+            CandidateRepository cr = new CandidateRepository();
+            List<EditApplyModel> EditApplyList = cr.GetAllEditApply(); ;
+            List<ManageEditApplyDisplayModel> displayList = new List<ManageEditApplyDisplayModel>();
+            foreach (EditApplyModel eam in EditApplyList)
+            {
+                displayList.Add(new ManageEditApplyDisplayModel(eam));
+            }
+            return Json(displayList);
+        }
+
+        //[Authorize]
         public ActionResult Edit(int id)
         {
             CandidateRepository cr = new CandidateRepository();
@@ -69,7 +86,7 @@ namespace hongtan.Controllers
             return View(cm);
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPost]
         public ActionResult Edit()
         {
@@ -93,7 +110,7 @@ namespace hongtan.Controllers
 
         }
 
-        [Authorize]
+        //[Authorize]
         public ActionResult Delete(int id)
         {
             CandidateRepository cr = new CandidateRepository();
@@ -109,7 +126,7 @@ namespace hongtan.Controllers
             }
         }
 
-        [Authorize]
+       // [Authorize]
         public ActionResult SwitchDisplay(int id)
         {
             CandidateRepository cr = new CandidateRepository();
@@ -124,17 +141,18 @@ namespace hongtan.Controllers
             }
         }
 
-        [Authorize]
+        //[Authorize]
+        [HttpPost]
         public ActionResult DeleteEditApply(int id) {
             try
             {
                 CandidateRepository cr = new CandidateRepository();
                 cr.RejectEditApply(id);
-                return Content("<script>alert('操作成功！');location.replace('http://stu.fudan.edu.cn/hongtan/admin/ManageEditApply');</script>", "text/html");
+                return Json(new { success = true });
             }
             catch (Exception e)
             {
-                return Content("<script>alert('操作失败，请稍后重试！');location.replace('http://stu.fudan.edu.cn/hongtan/admin/ManageEditApply');</script>", "text/html");
+                return Json(new { success = false, message=e.Message });
             }
             
         }
