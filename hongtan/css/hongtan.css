@@ -62,6 +62,7 @@ td {
         height: 115px;
         text-indent: 2em;
         padding-top: 5px;
+        word-break:break-all;
     }
 
 .vote_label {
@@ -102,18 +103,20 @@ td {
     float:left;
 }
 
-#searchBar {
-    float:right;
-    width:300px;
-    line-height:180%;
-    margin-top:5px;
+.searchbar {
+    margin-top:15px;
 }
 
-#searchInput {
+.searchbar_title {
+    font-size: 20px;
+    color: #d34c41;
+    margin:10px 0;
+}
+
+.search_input {
     width:150px;
-    height:25px;
-    margin-right:10px;
-    float:left;
+    height:30px;
+    margin-right:20px;
 }
 
 
@@ -167,7 +170,6 @@ td {
 }
 
 .btn_searchSubmit {
-    float:left;
     width:80px;
     line-height:190%;
 }

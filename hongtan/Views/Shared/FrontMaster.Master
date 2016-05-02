@@ -25,7 +25,6 @@
             <asp:ContentPlaceHolder ID="LeftPagePlaceHolder" runat="server"></asp:ContentPlaceHolder>
         </div>
     </div>
-    <script src="<%=Url.Content("/js/search.js") %>"></script>
     <!--<script src="/js/vote.js"></script>-->
     <script src="<%=Url.Content("/js/knockout-2.2.0.js") %>"></script>
     <asp:ContentPlaceHolder ID="ScriptPlaceHolder" runat="server"></asp:ContentPlaceHolder>

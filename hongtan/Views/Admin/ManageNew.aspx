@@ -1,6 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/AdminMaster.Master" Inherits="System.Web.Mvc.ViewPage<List<hongtan.Models.CandidateModel>>" %>
-
-<%@ Import Namespace="hongtan.Models" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/AdminMaster.Master" Inherits="System.Web.Mvc.ViewPage" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TableHolder" runat="server">
     <thead>
@@ -18,35 +16,28 @@
             <td>操作</td>
         </tr>
     </thead>
-    <tbody>
-        <%foreach (CandidateModel cm in Model)
-          {%>
+    <tbody data-bind="foreach:applyList">
         <tr>
-            <td class="table_short"><%=Html.Encode(cm.Id) %></td>
-            <td class="table_short"><%=Html.Encode(cm.Name) %></td>
-            <td class="table_short"><%=Html.Encode(cm.Type%10==0?"个人":"团队") %></td>
-            <td class="table_short"><%=Html.Encode(cm.Tel) %></td>
-            <td class="table_long"><%=Html.Encode(cm.Introduction) %></td>
-            <td class="table_short"><%=Html.Encode(cm.Story) %></td>
-            <td class="table_short"><%=Html.Encode(cm.BidCount) %></td>
-            <td class="table_short"><%=Html.Encode(cm.Priority) %></td>
-            <td class="table_short"><a href="admin/SwitchDisplay/<%=Html.Encode(cm.Id) %>">通过</a>|<a href="admin/Edit/<%=Html.Encode(cm.Id) %>">编辑</a>|<a href="admin/Delete/<%=Html.Encode(cm.Id) %>">删除</a></td>
-
+            <td class="table_short" data-bind="text:Id"></td>
+            <td class="table_short" data-bind="text: Name"></td>
+            <td class="table_short" data-bind="text: Department"></td>
+            <td class="table_short" data-bind="text: Role"></td>
+            <td class="table_short" data-bind="text: Type%10==0?'个人':'团队'"></td>
+            <td class="table_short" data-bind="text: Tel"></td>
+            <td class="table_long" data-bind="text: Introduction"></td>
+            <td class="table_short" data-bind="text: Story"></td>
+             <td class="table_short">
+                <div data-bind="visible: Type > 1">
+                    <a href="#" data-bind="attr: { title: getDuplicatedInfo(Type) }">疑似</a>
+                </div>
+            </td>
+            <td class="table_short" data-bind="text: Submitter"></td>
             <td class="table_short">
-                <%if (cm.Type > 1)
-                  {
-                      CandidateRepository cr = new CandidateRepository();
-                      CandidateModel cmDuplicated = cr.GetInfoById((int)(cm.Type / 10));
-                      String duplicateInfo = "姓名：" + cmDuplicated.Name;
-                      duplicateInfo += "&#10;简介：" + cmDuplicated.Introduction;
-                      duplicateInfo += "&#10;故事：" + cmDuplicated.Story;
-                %>
-                <a href="#" title="<%=duplicateInfo %>">疑似</a>
-                <%} %>
-
+                <a data-bind="click: function (data, event) { $parent.switchDisplay($data)}" class="btn btn-xs btn-primary">通过</a> 
+                <a data-bind="attr:{href:'admin/Edit/'+Id}" class="btn btn-xs btn-warning">编辑</a>  
+                <a data-bind="click: function (data, event) { $parent.deleteApply($data)}" class="btn btn-xs btn-danger">删除</a>
             </td>
         </tr>
-        <%} %>
     </tbody>
 </asp:Content>
 
@@ -58,8 +49,16 @@
     <script type="text/javascript">
         var newCandidateViewModel = (function (ko) {
             applyList = ko.observableArray([]),
-            switchDisplay = function () {
-
+            switchDisplay = function (apply) {
+                ajaxRequest('post', '<%=Url.Action("SwitchDisplay")%>', { id: apply.Id }, function (data) {
+                    if (data.success) {
+                        alert('操作成功')
+                        applyList.remove(apply)
+                    }
+                    else {
+                        alert('操作失败，请重试 [' + data.message + ']')
+                    }
+                })
             },
             deleteApply = function (apply) {
                 ajaxRequest('post', '<%=Url.Action("Delete")%>', { id: apply.Id }, function (data) {
@@ -73,7 +72,7 @@
                 })
             },
             loadData = function () {
-                ajaxRequest('post', '<%=Url.Action("GetAllEditApply")%>', {}, function (data) {
+                ajaxRequest('post', '<%=Url.Action("GetAllNewCandidate")%>', {}, function (data) {
                     for (var i = 0; i < data.length; i++) {
                         applyList.push(data[i])
                     }
@@ -102,7 +101,7 @@
             }
         })(ko)
         $(document).ready(function () {
-            ko.applyBindings(editApplyViewModel)
+            ko.applyBindings(newCandidateViewModel)
         })
     </script>
 

@@ -174,6 +174,7 @@
                     success: function (data) {
                         if (data.success) {
                             alert('提名成功!我们将在24小时内审核你的提名，审核通过后你的提名会出现在投票列表内。')
+                            window.location.href='<%=Url.Action("Vote","Home")%>'
                         }
                         else {
                             alert(data.message)

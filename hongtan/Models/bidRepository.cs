@@ -8,7 +8,7 @@ namespace hongtan.Models
 {
     public class bidRepository
     {
-        private bidDataContext db = new bidDataContext(ConfigurationManager.ConnectionStrings["LocalTestConnectionString"].ConnectionString);
+        private bidDataContext db = new bidDataContext(ConfigurationManager.ConnectionStrings["HongtanConnectionString"].ConnectionString);
         
         public void Insert(BidModel b)
         {

@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="<%=Url.Content("/css/admin.css") %>" />
 </head>
 <body>
+    <%bool isSuperAdmin = (HttpContext.Current.User.Identity.Name == "Super"); %>
     <div class="header">
         <nav class="navbar navbar-default">
             <div class="headerContainer">
@@ -20,9 +21,10 @@
                     <li><a href="<%=Url.Action("ManageNew","Admin") %>">审核新提名</a></li>
                     <li><a href="<%=Url.Action("ManageEditApply","Admin") %>">审核信息修改申请</a></li>
                     <li><a href="<%=Url.Action("CurrentVote","Admin") %>">目前投票情况</a></li>
-                    <li><a href="<%=Url.Action("SuperAdminPanel","Admin") %>">9又3/4站台</a></li>
+                    <%if(isSuperAdmin){ %>
+                    <li><a href="<%=Url.Action("AntiCheat","Admin") %>">刷票清理</a></li>
+                    <%} %>
                 </ul>
-                <p class="navbar-text navbar-right"><%=HttpContext.Current.User.Identity.Name %></p>
             </div>
         </nav>
     </div>
@@ -32,12 +34,8 @@
         </div>
         <table class="table table-bordered table-hover">
             <asp:ContentPlaceHolder ID="TableHolder" runat="server"></asp:ContentPlaceHolder>
-
-            <asp:ContentPlaceHolder ID="THeadHolder" runat="server"></asp:ContentPlaceHolder>
-
-
-            <asp:ContentPlaceHolder ID="ContentHolder" runat="server"></asp:ContentPlaceHolder>
         </table>
+        <asp:ContentPlaceHolder ID="ContentHolder" runat="server"></asp:ContentPlaceHolder>
     </div>
     <div style="clear: both"></div>
     <script type="text/javascript" src="<%=Url.Content("/js/admin.js") %>"></script>
