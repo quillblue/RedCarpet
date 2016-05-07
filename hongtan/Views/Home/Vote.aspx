@@ -4,6 +4,7 @@
 </asp:Content>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="LeftPagePlaceHolder" runat="server">
+    <%bool isValidTime = DateTime.Now < new DateTime(2016, 5, 23, 0, 0, 0); %>
     <div class="vote_form">
         <div data-bind="foreach: voteList">
             <div class="vote_card" data-bind="visible: isMatched(Department, Role, Name)">
@@ -22,14 +23,22 @@
                         <td class="vote_label">票数：</td>
                         <td class="vote_bidCount" data-bind="text: BidCount"></td>
                         <td>
-                            <input type="checkbox" name="VoteCheck" data-bind="value: Id">投TA一票</input></td>
+                            <%if (isValidTime)
+                              { %>
+                            <input type="checkbox" name="VoteCheck" data-bind="value: Id">投TA一票</input>
+                            <%} %>
+                        </td>
+
                     </tr>
                 </table>
             </div>
         </div>
         <div style="clear: both"></div>
         <div class="btn_container">
+             <%if (isValidTime)
+                              { %>
             <input type="submit" id="submit_vote" class="btn btn_submit" value="提&nbsp;&nbsp;交" data-bind="click: voteSubmit" />
+            <%} %>
         </div>
     </div>
 </asp:Content>
@@ -41,7 +50,7 @@
             投票规则
         </div>
         <div class="intro">
-            <p>1. 提名投票开放时间：2016年5月8日20:16 至 2015年5月22日24:00</p>
+            <p>1. 提名投票开放时间：2016年5月8日20:16 至 2016年5月22日24:00</p>
             <p>2. 投票期间，每IP每天可参与投票一次，选择不多于5位候选人。</p>
             <p>3. 若想要选择的人选未出现在投票列表中，可选择另行提名。通过审核后该提名将在第二天出现在候选列表中。每次提名数量不限。</p>
             <p>4. 若需更正被提名人相关信息，可点击投票栏“申请更正信息”以申请修改，通过审核后修改生效</p>
@@ -150,7 +159,7 @@
                 if (votedItems.length > 5) {
                     alert('单次投票不能选择超过5位候选人！'); return;
                 }
-                ajaxRequest('post', '<%=Url.Action("VoteSubmit")%>', {voteCheck:votedItems.toString()}, function (data) {
+                ajaxRequest('post', '<%=Url.Action("VoteSubmit")%>', { voteCheck: votedItems.toString() }, function (data) {
                     if (data.success) {
                         alert('投票成功！')
                         location.reload()

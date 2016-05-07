@@ -119,7 +119,7 @@
                             最好写出故事发生的时间、地点，以及最重要的故事里你或TA的样子~</td>
                     </tr>
                     <tr class="formSingleLine">
-                        <td class="form_item">你的联系方式</td>
+                        <td class="form_item">你的联系方式<span class="requiredItem">*</span></td>
                         <td>
                             <input name="mobile" type="text" class="textBoxSingleLine" maxlength="50" required="required" data-bind="value:submitter" /></td>
                         <td class="form_note">仅供工作人员在联系不到被提名人时，联系提名人使用</td>
@@ -147,7 +147,8 @@
         var viewModel = {
             submit: function () {
                 if(this.name().trim()==''){alert('被提名人姓名不能为空');return;}
-                if(this.story().trim()==''){alert('TA(们)的故事不嫩为空');return;}
+                if (this.story().trim() == '') { alert('TA(们)的故事不能为空'); return; }
+                if (this.submitter().trim() == '') { alert('为避免联系不到被提名人，请提供你的联系方式~'); return; }
                 var intro=''
                 if(this.department!='999'){intro=$('#select-dept').find('option:selected').text();}
                 if (this.role != '') {

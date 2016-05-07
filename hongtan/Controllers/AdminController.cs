@@ -10,6 +10,7 @@ namespace hongtan.Controllers
 {
     public class AdminController : Controller
     {
+        #region Login
         //
         // GET: /Admin/
         [Authorize]
@@ -41,26 +42,36 @@ namespace hongtan.Controllers
                 return Content("<script>location.replace('" + Url.Action("Login", "Admin") + "');</script>", "text/html");
             }
         }
+        #endregion
 
-        //[Authorize]
+        #region PageView
+        [Authorize]
         public ActionResult ManageNew()
         {
             return View();
         }
 
-        //[Authorize]
+        [Authorize]
         public ActionResult CurrentVote()
         {
             return View();
         }
 
-        //[Authorize]
+        [Authorize]
         public ActionResult ManageEditApply()
         {
             return View();
         }
 
-        //[Authorize]
+        [Authorize]
+        [HongtanAuth(Roles="Super")]
+        public ActionResult AntiCheat() {
+            return View();
+        }
+        #endregion
+
+        #region Mangement Operations
+        [Authorize]
         [HttpPost]
         public ActionResult GetInfoById(int id) {
             CandidateRepository cr = new CandidateRepository();
@@ -74,7 +85,7 @@ namespace hongtan.Controllers
             }
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpPost]
         public ActionResult GetCurrentVote()
         {
@@ -83,7 +94,7 @@ namespace hongtan.Controllers
             return Json(NewCanList);
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpPost]
         public ActionResult GetAllNewCandidate()
         {
@@ -92,9 +103,8 @@ namespace hongtan.Controllers
             return Json(NewCanList);
         }
 
-       
 
-        //[Authorize]
+        [Authorize]
         public ActionResult GetAllEditApply()
         {
             CandidateRepository cr = new CandidateRepository();
@@ -107,39 +117,43 @@ namespace hongtan.Controllers
             return Json(displayList);
         }
 
-        //[Authorize]
+        [Authorize]
         public ActionResult Edit(int id)
         {
-            CandidateRepository cr = new CandidateRepository();
-            CandidateModel cm = cr.GetInfoById(id);
-            return View(cm);
+            ViewData["id"] = id;
+            return View();
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpPost]
-        public ActionResult Edit()
+        public ActionResult GetEditBase(int id) {
+            CandidateRepository cr = new CandidateRepository();
+            CandidateModel cm = cr.GetInfoById(id);
+            if (HttpContext.User.Identity.Name != "Super") { cm.BidAdjust = 0; }
+            return Json(cm);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult Edit(CandidateModel cm, int note=0)
         {
             try
             {
                 CandidateRepository cr = new CandidateRepository();
-                CandidateModel cm = new CandidateModel();
-                cm.Id = Convert.ToInt32(Request.Form["Edit_Id"]);
-                cm.Name = Request.Form["Edit_Name"];
-                cm.Tel = Request.Form["Edit_Tel"];
-                cm.Introduction = Request.Form["Edit_Introduction"];
-                cm.Story = Request.Form["Edit_Story"];
-                cm.Priority = Convert.ToInt32(Request.Form["Edit_Priority"]);
                 cr.Update(cm);
-                return Content("<script>alert('操作成功！');location.replace('http://stu.fudan.edu.cn/hongtan/admin/');</script>", "text/html");
+                if (HttpContext.User.Identity.Name == "Super" && note != 0) {
+                    cr.BeAdjusted(cm.Id, note);
+                }
+                return Json(new { success = true });
             }
             catch (Exception e)
             {
-                return Content("<script>alert('操作失败，请稍后重试！');location.replace('http://stu.fudan.edu.cn/hongtan/admin/');</script>", "text/html");
+                return Json(new { success = false,message=e.Message });
             }
 
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpPost]
         public ActionResult Delete(int id)
         {
@@ -156,7 +170,7 @@ namespace hongtan.Controllers
             }
         }
 
-        // [Authorize]
+        [Authorize]
         [HttpPost]
         public ActionResult SwitchDisplay(int id)
         {
@@ -172,7 +186,7 @@ namespace hongtan.Controllers
             }
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpPost]
         public ActionResult DeleteEditApply(int id)
         {
@@ -186,8 +200,109 @@ namespace hongtan.Controllers
             {
                 return Json(new { success = false, message = e.Message });
             }
+        }
+        #endregion
 
+        #region AntiCheat Module
+        [HongtanAuth(Roles = "Super")]
+        [HttpPost]
+        public ActionResult CheckCheatBids(int topCount, int configA=500, int configB=100, int configC=100) {
+            CandidateRepository cr = new CandidateRepository();
+            IEnumerable<int> topCandidateIds = cr.GetTopCandidates(topCount);
+            AntiCheat ac = new AntiCheat(configA, configB, configC);
+            foreach(int candidateId in topCandidateIds){
+                ac.CheckVoteByCandidate(candidateId);
+            }
+            return null;
         }
 
+        [HongtanAuth(Roles = "Super")]
+        [HttpPost]
+        public ActionResult CheckCheatBidsByCandidateId(int candidateId, int configA = 500, int configB = 100, int configC = 100)
+        {
+            AntiCheat ac = new AntiCheat(configA, configB, configC);
+            ac.CheckVoteByCandidate(candidateId);
+            return null;
+        }
+
+        [HongtanAuth(Roles = "Super")]
+        [HttpPost]
+        public ActionResult WithdrawCheatedBids(int candidateId=0) {
+            try
+            {
+                CandidateRepository cr = new CandidateRepository();
+                bidRepository br = new bidRepository();
+                IEnumerable<BidModel> bidList = br.GetCheatBidsByCandidateId(candidateId);
+                foreach (BidModel bid in bidList)
+                {
+                    String[] relatedCandidates = bid.VoteContent.Split(',');
+                    foreach (string candidateIdString in relatedCandidates) {
+                        cr.RelatedVoteIsWithdrawed(Convert.ToInt32(candidateIdString));
+                    }
+                    br.DeleteVoteById(bid.Id);
+                }
+                return Json(new { success = true });
+            }
+            catch (Exception e)
+            {
+                return Json(new { success = false, message = e.Message });
+            }
+        }
+
+        [HongtanAuth(Roles = "Super")]
+        [HttpPost]
+        public ActionResult ReVerifyChecks(int candidateId = 0)
+        {
+            try
+            {
+                CandidateRepository cr = new CandidateRepository();
+                bidRepository br = new bidRepository();
+                if (candidateId == 0)
+                {
+                    IEnumerable<int> candidateList = cr.GetAllCandidates();
+                    foreach (int cId in candidateList) {
+                        br.UpdateVoteStatusByCandidateId(cId, 0);
+                    }
+                }
+                else
+                {
+                    br.UpdateVoteStatusByCandidateId(candidateId, 0);
+                }
+                return Json(new {success=true});
+            }
+            catch (Exception e) {
+                return Json(new { success = false, message = e.Message });
+            }
+        }
+
+        [HongtanAuth(Roles = "Super")]
+        [HttpPost]
+        public ActionResult ForgiveBidsByCandidate(int candidateId = 0)
+        {
+            try
+            {
+                CandidateRepository cr = new CandidateRepository();
+                bidRepository br = new bidRepository();
+                if (candidateId == 0)
+                {
+                    IEnumerable<int> candidateList = cr.GetAllCandidates();
+                    foreach (int cId in candidateList)
+                    {
+                        br.UpdateVoteStatusByCandidateId(cId, 2);
+                    }
+                }
+                else
+                {
+                    br.UpdateVoteStatusByCandidateId(candidateId, -1);
+                }
+                return Json(new { success = true });
+            }
+            catch (Exception e)
+            {
+                return Json(new { success = false, message = e.Message });
+            }
+        }
+        
+        #endregion
     }
 }

@@ -32,10 +32,11 @@
         <div class="content_title">
             <asp:ContentPlaceHolder ID="titleHolder" runat="server"></asp:ContentPlaceHolder>
         </div>
+         <asp:ContentPlaceHolder ID="ContentHolder" runat="server"></asp:ContentPlaceHolder>
         <table class="table table-bordered table-hover">
             <asp:ContentPlaceHolder ID="TableHolder" runat="server"></asp:ContentPlaceHolder>
         </table>
-        <asp:ContentPlaceHolder ID="ContentHolder" runat="server"></asp:ContentPlaceHolder>
+       
     </div>
     <div style="clear: both"></div>
     <script type="text/javascript" src="<%=Url.Content("/js/admin.js") %>"></script>

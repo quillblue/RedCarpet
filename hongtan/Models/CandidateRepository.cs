@@ -35,6 +35,15 @@ namespace hongtan.Models
             db.SubmitChanges();
         }
 
+        public void RelatedVoteIsWithdrawed(int id) {
+            CandidateModel candidate = db.CandidateModel.First(c => c.Id == id);
+            candidate.BidCount -= 1;
+            if (candidate.BidAdjust < 0) {
+                candidate.BidAdjust += 1;
+            }
+            db.SubmitChanges();
+        }
+
         public List<CandidateModel> GetAllHidden()
         {
             List<CandidateModel> cl = new List<CandidateModel>();
@@ -102,6 +111,7 @@ namespace hongtan.Models
         {
             CandidateModel candidate = db.CandidateModel.First(c => c.Id == id);
             db.CandidateModel.DeleteOnSubmit(candidate);
+            db.EditApplyModel.DeleteAllOnSubmit(db.EditApplyModel.Where(eam => eam.RelatedCandidateId == id));
         }
 
         public CandidateModel GetInfoById(int id)
@@ -114,6 +124,9 @@ namespace hongtan.Models
         {
             CandidateModel candidate = db.CandidateModel.First(c => c.Id == cm.Id);
             candidate.Name = cm.Name;
+            candidate.Department = cm.Department;
+            candidate.Role = cm.Role;
+            candidate.Type = cm.Type;
             candidate.Tel = cm.Tel;
             candidate.Introduction = cm.Introduction;
             candidate.Story = cm.Story;
@@ -125,6 +138,14 @@ namespace hongtan.Models
             EditApplyModel eam = db.EditApplyModel.First(e => e.Id == id);
             db.EditApplyModel.DeleteOnSubmit(eam);
             db.SubmitChanges();
+        }
+
+        public IEnumerable<int> GetTopCandidates(int count) {
+            return db.CandidateModel.OrderBy(c => (c.BidCount - c.BidAdjust)).Take(count).Select(c=>c.Id);
+        }
+        public IEnumerable<int> GetAllCandidates()
+        {
+            return db.CandidateModel.OrderBy(c => (c.BidCount - c.BidAdjust)).Select(c => c.Id);
         }
 
         public void Save()

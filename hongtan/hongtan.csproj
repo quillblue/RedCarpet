@@ -112,10 +112,12 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HongtanAuthAttribute.cs" />
     <Compile Include="Controllers\StoryController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AntiCheat.cs" />
     <Compile Include="Models\bid.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -141,6 +143,7 @@
     </Content>
     <Content Include="css\admin.css" />
     <Content Include="css\bootstrap.css" />
+    <Content Include="css\hongtanMobile.css" />
     <Content Include="css\hongtan.css" />
     <Content Include="css\reset.css" />
     <Content Include="Global.asax" />
@@ -148,13 +151,16 @@
     <Content Include="js\jquery-1.7.2.min.js" />
     <Content Include="js\knockout-2.2.0.js" />
     <Content Include="js\search.js" />
+    <Content Include="Views\Admin\AntiCheat.aspx" />
     <Content Include="Views\Admin\Login.aspx" />
     <Content Include="Views\Admin\CurrentVote.aspx" />
     <Content Include="Views\Admin\Edit.aspx" />
     <Content Include="Views\Admin\ManageEditApply.aspx" />
     <Content Include="Views\Admin\ManageNew.aspx" />
+    <Content Include="Views\Home\AddNameMobile.aspx" />
     <Content Include="Views\Home\AddName.aspx" />
     <Content Include="Views\Home\EditApply.aspx" />
+    <Content Include="Views\Home\VoteMobile.aspx" />
     <Content Include="Views\Home\Vote.aspx" />
     <Content Include="Views\Home\VoteItem.ascx" />
     <Content Include="Web.config">

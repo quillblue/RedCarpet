@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using hongtan.Models;
+using System.Text.RegularExpressions;
 
 namespace hongtan.Controllers
 {
@@ -14,7 +15,17 @@ namespace hongtan.Controllers
 
         public ActionResult Vote()
         {
-            return View();
+            string osPat = "mozilla|m3gate|winwap|openwave|Windows NT|Windows 3.1|95|Blackcomb|98|ME|X Window|Longhorn|ubuntu|AIX|Linux|AmigaOS|BEOS|HP-UX|OpenBSD|FreeBSD|NetBSD|OS/2|OSF1|SUN";
+            string uAgent = Request.ServerVariables["HTTP_USER_AGENT"];
+            Regex reg = new Regex(osPat);
+            if (reg.IsMatch(uAgent))
+            {
+                return View();
+            }
+            else {
+                return View("VoteMobile");
+            }
+            
         }
 
         [HttpPost]
@@ -76,7 +87,17 @@ namespace hongtan.Controllers
         [HttpGet]
         public ActionResult AddName()
         {
-            return View();
+            string osPat = "mozilla|m3gate|winwap|openwave|Windows NT|Windows 3.1|95|Blackcomb|98|ME|X Window|Longhorn|ubuntu|AIX|Linux|AmigaOS|BEOS|HP-UX|OpenBSD|FreeBSD|NetBSD|OS/2|OSF1|SUN";
+            string uAgent = Request.ServerVariables["HTTP_USER_AGENT"];
+            Regex reg = new Regex(osPat);
+            if (reg.IsMatch(uAgent))
+            {
+                return View();
+            }
+            else
+            {
+                return View("AddNameMobile");
+            }
         }
 
         [HttpPost]
@@ -131,5 +152,6 @@ namespace hongtan.Controllers
                 return Content("<script>alert('提交失败，请稍后重试。错误信息：" + e.Message.ToString() + "');location.replace('http://stu.fudan.edu.cn/hongtan/');</script>", "text/html");
             }
         }
+
     }
 }
